@@ -1,7 +1,13 @@
 const express = require('express')
 const app = express()
+const morgan = require('morgan')
+const fs = require('fs')
+const path = require('path')
+
+const accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' })
 
 app.use(express.json())
+app.use(morgan('combined', { stream: accessLogStream }))
 
 let persons = [
     { 
@@ -25,7 +31,7 @@ let persons = [
       "number": "39-23-6423122"
     }
 ]
-
+  
   app.get('/api/persons', (request, response) => {
     response.json(persons)
   })
