@@ -1,13 +1,13 @@
 const express = require('express')
 const app = express()
 const morgan = require('morgan')
-const fs = require('fs')
-const path = require('path')
 
-const accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' })
 
 app.use(express.json())
-app.use(morgan('combined', { stream: accessLogStream }))
+
+morgan.token('gary1', function (req, res) { return JSON.stringify(req.body) })
+
+app.use(morgan(':method :url :status :res[content-length] - :response-time ms :gary1'))
 
 let persons = [
     { 
@@ -86,6 +86,8 @@ let persons = [
   
     response.json(person)
   })
+
+ 
 
   const PORT = 3001
   app.listen(PORT, () => {
