@@ -31,10 +31,17 @@ let persons = [
   })
 
   app.get('/info',(request, response) => {
-    text = `Phonebook has info for ${persons.length} people </br></br> ${Date()}`
+    const text = `Phonebook has info for ${persons.length} people </br></br> ${Date()}`
    
     response.send(text)
     
+  })
+
+  app.get('/api/persons/:id',(request, response) => {
+    const id = Number(request.params.id)
+    const person = persons.find(n=>n.id===id)
+    
+    response.json(person)
   })
 
   const PORT = 3001
