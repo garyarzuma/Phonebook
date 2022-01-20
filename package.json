@@ -4,7 +4,9 @@
   "description": "Create an online phonebook using Node and Express in JavaScript and practice using Postman and get more familiarity with the REST API.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "nodemon index.js -L"
   },
   "repository": {
     "type": "git",
@@ -15,5 +17,11 @@
   "bugs": {
     "url": "https://github.com/garyarzuma/Phonebook/issues"
   },
-  "homepage": "https://github.com/garyarzuma/Phonebook#readme"
+  "homepage": "https://github.com/garyarzuma/Phonebook#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  },
+  "dependencies": {
+    "express": "^4.17.2"
+  }
 }
