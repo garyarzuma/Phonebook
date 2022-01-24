@@ -41,21 +41,16 @@ let persons = [
   })
 
   app.get('/info',(request, response) => {
-    const text = `Phonebook has info for ${persons.length} people </br></br> ${Date()}`
-   
-    response.send(text)
-    
+    Phonebook.count({},(err,count)=>{
+      const text = `Phonebook has info for ${count} people </br></br> ${Date()}`
+      response.send(text)
+    })
   })
 
   app.get('/api/persons/:id',(request, response) => {
-    const id = Number(request.params.id)
-    const person = persons.find(n=>n.id===id)
-    if (person) {
-        response.json(person)
-      } else {
-        response.status(404).end()
-      }
-    
+    Phonebook.findById(request.params.id).then(person => {
+      response.json(person)
+    })  
   })
 
   app.delete('/api/persons/:id', (request, response) => {
