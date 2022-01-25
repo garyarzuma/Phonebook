@@ -47,10 +47,12 @@ let persons = [
     })
   })
 
-  app.get('/api/persons/:id',(request, response) => {
-    Phonebook.findById(request.params.id).then(person => {
+  app.get('/api/persons/:id',(request, response, next) => {
+    Phonebook.findById(request.params.id)
+    .then(person => {
       response.json(person)
-    })  
+    })
+    .catch(error => next(error))  
   })
 
   app.delete('/api/persons/:id', (request, response, next) => {
