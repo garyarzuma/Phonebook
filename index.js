@@ -86,12 +86,6 @@ let persons = [
         error: 'Name or Number missing' 
       })
     }
-
-   /*  else if(persons.find(x => x.name === body.name)) {
-        return response.status(400).json({
-            error: 'Name already exists in phonebook'
-        })
-    } */
   
     const person = new Phonebook({
       name: body.name,
