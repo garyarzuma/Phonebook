@@ -69,21 +69,22 @@ let persons = [
       })
     }
 
-    else if(persons.find(x => x.name === body.name)) {
+   /*  else if(persons.find(x => x.name === body.name)) {
         return response.status(400).json({
             error: 'Name already exists in phonebook'
         })
-    }
+    } */
   
-    const person = {
+    const person = new Phonebook({
       name: body.name,
-      number: body.number || false,
-      id: Math.floor(Math.random()*10000)
-    }
+      number: body.number,
+    })
   
-    persons = persons.concat(person)
   
-    response.json(person)
+    person.save().then(savedContact => {
+      response.json(savedContact)
+    })
+   
   })
 
  
