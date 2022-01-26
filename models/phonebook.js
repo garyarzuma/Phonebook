@@ -18,7 +18,14 @@ mongoose.connect(url)
     minLength: 3,
     required: true
   },
-  number: String,
+  number: {
+    type: String,
+    minLength: 8,
+    validate: (v) => {
+        return /^\d{3}-\d{3}-\d{4}$/.test(v)
+    }
+    },
+          
 })
 
 personSchema.set('toJSON', {

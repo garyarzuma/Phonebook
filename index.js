@@ -71,7 +71,7 @@ let persons = [
       number: body.number,
     }
   
-    Phonebook.findByIdAndUpdate(request.params.id, person, { new: true })
+    Phonebook.findByIdAndUpdate(request.params.id, person, { new: true,  runValidators: true })
       .then(updatedPerson => {
         response.json(updatedPerson)
       })
@@ -93,14 +93,12 @@ let persons = [
   })
 
   const errorHandler = (error, request, response, next) => {
-    
-  
      if (error.name === 'CastError') {
       return response.status(404).send({ error: 'malformatted id' })
     } else if (error.name === 'ValidationError') {
-      return response.status(404).json({ error: error.message })
-    }   
-  
+      return response.status(404).send({ error: error }) //sends validation error in response so we can get this in the frontend code
+    }    
+    
     next(error)
   }
   
