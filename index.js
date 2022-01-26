@@ -100,8 +100,7 @@ let persons = [
     }    
     
     next(error)
-  }
-  
+  } 
   // this has to be the last loaded middleware.
   app.use(errorHandler)
 
